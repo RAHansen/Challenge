@@ -176,13 +176,24 @@
                 if (inputLine != null)
                 {
                     string[] locations = inputLine.Split(',');
-                    // A production program would need more robust error handling here to make sure user input is valid.
                     try
                     {
                         targetX = int.Parse(locations[0]);
                         targetY = int.Parse(locations[1]);
                         targetLocation.X = targetX;
                         targetLocation.Y = targetY;
+                        // check to see if coordinates are in range
+                        if(targetX < MIN_WORLD_X || targetX > MAX_WORLD_X)
+                        {
+                            Console.WriteLine("Invalid X coordinate. Valid range is " + MIN_WORLD_X + " to " + MAX_WORLD_X);
+                            continue;
+                        }
+                        else if(targetY < MIN_WORLD_Y || targetY > MAX_WORLD_Y)
+                        {
+                            Console.WriteLine("Invalid Y coordinate. Valid range is " + MIN_WORLD_Y + " to " + MAX_WORLD_Y);
+                            continue;
+                        }
+                        /* else */
                         ValidInput = true;
                     }
                     catch (Exception)
